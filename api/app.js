@@ -8,24 +8,25 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
-const postRoute = require("./routes/posts");
 const cors = require("cors")
 // Connect to Mongodb
 constconnection = require("./db/config");
 
-
+if(process.env.NODE_ENV === "development"){
+  app.use(morgan("dev"))
+}
 
 //middleware
 app.use(express.json());
 app.use(helmet());
-app.use(morgan("common"));
+// app.use(morgan("common"));
 app.use(cors());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 
 
-port = process.env.PORT || 5000;
+port = process.env.NODE_ENV || 5000;
 app.listen(port, () => {
   console.log(`Server started running on port ${port} `);
 });
