@@ -12,7 +12,7 @@ const cors = require("cors")
 // Connect to Mongodb
 constconnection = require("./db/config");
 
-if(process.env.NODE_ENV === "development"){
+if(process.env.PORT === "development"){
   app.use(morgan("dev"))
 }
 
@@ -26,7 +26,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 
 
-port = process.env.NODE_ENV || 5000;
+port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server started running on port ${port} `);
 });
